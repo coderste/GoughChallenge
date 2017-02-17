@@ -8,7 +8,7 @@ get_header(); ?>
     <!-- Where the magic happens -->
     <div class="location-distance clearfix">
         <div class="col-md-6 google-maps">
-            <img src="https://placehold.it/550x550" alt="" />
+            <div id="map"></div>
         </div>
         <div class="col-md-6 user-input">
             <?php if ( have_posts() ): ?>

@@ -88,6 +88,12 @@ header#site-header h1::after {
 | =Location
 |---------------------
 */
+div.location-distance div#map {
+    height: 350px;
+    width: 100%;
+    border: 2px dashed #fefefe;
+}
+
 div.location-distance div.user-input div.input-wrap { margin-bottom: 25px; }
 div.location-distance div.user-input div.input-wrap label {
     display: block;

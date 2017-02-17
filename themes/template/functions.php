@@ -47,10 +47,9 @@ if ( ! function_exists( 'theme_resources' ) ):
         wp_enqueue_script( 'bootstrap-js', get_theme_file_uri( '/assets/js/bootstrap.js' ), array( 'jquery' ), false, true );
 
         // Other JS Files (Mainly 3rd Party Sliders etc.)
-        // wp_enqueue_script( 'slider-js', get_theme_file_uri( '/assets/js/' ), array( '' ), false, true );
+        wp_enqueue_script( 'google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBvws2fKizxVlhPvpsYITqHr0TmQhwFsIw', '', false, true );
 
         // Custom JavaScript (Custom Made)
-        wp_enqueue_script( 'form-js', get_theme_file_uri( '/assets/js/form.js' ), array( 'jquery' ), false, true );
         wp_enqueue_script( 'main-js', get_theme_file_uri( '/assets/js/main.js' ), array( 'jquery' ), false, true );
 
         // Admin Ajax Localize
