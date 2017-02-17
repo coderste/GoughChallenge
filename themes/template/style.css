@@ -1,0 +1,47 @@
+/**
+ * Theme Name: Gough Challenge Theme
+ * Theme URI: https://www.stephenhinett.co.uk
+ * Author: Stephen Hinett
+ * Author URI: https://www.stephenhinett.co.uk
+ * Description: Custom WordPress Theme for the Gough Bailey Wright Challenge
+ * Version: 1.0
+ * License: GPL3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ */
+
+/* Import Fonts */
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900);
+
+/**
+|------------------------
+| =Global Style
+|------------------------
+*/
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #00a8d5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #fefefe;
+    cursor: default;
+}
+
+/**
+|------------------------
+| =Page Styles
+|------------------------
+*/
+header#site-header {
+    text-align: center;
+}
+
+header#site-header h1 {
+    text-transform: uppercase;
+}
