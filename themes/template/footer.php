@@ -24,101 +24,70 @@
 	<!-- WordPress Footer -->
 	<?php wp_footer(); ?>
     <script>
-	google.maps.event.addDomListener(window, 'load', init);
-
-    function init() {
-        // Basic options for a simple Google Map
-        // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-        var mapOptions = {
-            // How zoomed in you want the map to start at (always required)
-            zoom: 16,
-            scrollwheel: false,
-
-            // Change Zoom Controls
-            mapTypeControl: false,
-            zoomControl: true,
-            zoomControlOptions: {
-                position: google.maps.ControlPosition.LEFT_TOP
-            },
-            streetViewControl: true,
-            streetViewControlOptions: {
-                position: google.maps.ControlPosition.LEFT_TOP
-            },
-
-            // The latitude and longitude to center the map (always required)
-            center: new google.maps.LatLng(52.3353884, -2.0625768), // New York
-
-            // How you would like to style the map.
-            // This is where you would paste any style found on Snazzy Maps.
-            styles: [{
-                "featureType": "administrative",
-                "elementType": "labels.text.fill",
-                "stylers": [{
-                    "color": "#444444"
-                }]
-            }, {
-                "featureType": "landscape",
-                "elementType": "all",
-                "stylers": [{
-                    "color": "#efefef"
-                }]
-            }, {
-                "featureType": "poi",
-                "elementType": "all",
-                "stylers": [{
-                    "visibility": "off"
-                }]
-            }, {
-                "featureType": "road",
-                "elementType": "all",
-                "stylers": [{
-                    "saturation": -100
-                }, {
-                    "lightness": 45
-                }]
-            }, {
-                "featureType": "road.highway",
-                "elementType": "all",
-                "stylers": [{
-                    "visibility": "simplified"
-                }]
-            }, {
-                "featureType": "road.arterial",
-                "elementType": "labels.icon",
-                "stylers": [{
-                    "visibility": "off"
-                }]
-            }, {
-                "featureType": "transit",
-                "elementType": "all",
-                "stylers": [{
-                    "visibility": "off"
-                }]
-            }, {
-                "featureType": "water",
-                "elementType": "all",
-                "stylers": [{
-                    "color": "#46bcec"
-                }, {
-                    "visibility": "on"
-                }]
-            }]
-        };
-
-        // Get the HTML DOM element that will contain your map
-        // We are using a div with id="map" seen below in the <body>
-        var mapElement = document.getElementById('map');
-
-        // Create the Google Map using our element and options defined above
-        var map = new google.maps.Map(mapElement, mapOptions);
-
-        // Let's also add a marker while we're at it
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(52.3353884, -2.0625768),
-            map: map,
-            title: 'Gough'
+    jQuery(document).ready( function($) {
+        map = new GMaps({
+            div: '#map',
+            lat: 52.3353884,
+            lng: -2.0625768
         });
-    }
+        map.addMarker({
+            lat: 52.3353884,
+            lng: -2.0625768,
+        });
+
+        $( function() {
+            var locationForm = $( '#location_form' );
+
+            var results = $( 'div#result' );
+            var formMessage = $( 'div.form-message' );
+            var inputFields = $( 'input.required' );
+
+            var submitButton = $( 'button.btn-submit' );
+
+            $( locationForm ).submit( function( eve ) {
+                eve.preventDefault();
+                eve.stopPropagation();
+
+                // Disable button
+                submitButton.attr( 'disabled', 'disabled' );
+                submitButton.addClass( 'disabled' );
+
+                var user_loc = $( '#user_loc' ).val();
+                var other_loc = $( '#other_loc' ).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: locationAjax.ajaxurl,
+                    data: {
+                        'action': 'location_submit',
+                        'user_location': user_loc,
+                        'other_location': other_loc
+                    },
+                    success: function( data )
+                    {
+                        $( formMessage ).remove();
+                        $( results ).html( data );
+
+                        submitButton.removeAttr('disabled');
+                        submitButton.removeClass('disabled');
+                    },
+                    error: function( errorThrown )
+                    {
+                        submitButton.removeAttr('disabled');
+                        submitButton.removeClass('disabled');
+
+                        if ( errorThrown.responseText !== '' ) {
+                            $( formMessage ).text( errorThrown.responseText );
+                        } else {
+                            $( formMessage ).text( 'Oops! An error occured and your message could not be sent.' );
+                        }
+
+                        console.log( errorThrown );
+                    }
+                })
+            } );
+        } )
+    });
     </script>
 </body>
 </html>

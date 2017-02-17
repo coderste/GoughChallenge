@@ -12,21 +12,6 @@
 
 /**
 |---------------------
-| =Animations
-|---------------------
-*/
-@keyframes borderTransition {
-    from {
-        border: 1px dashed #fefefe;
-    }
-
-    to {
-        border: 1px solid #fefefe;
-    }
-}
-
-/**
-|---------------------
 | =Global Styles
 |---------------------
 */
@@ -94,6 +79,10 @@ div.location-distance div#map {
     border: 2px dashed #fefefe;
 }
 
+div.location-distance div.user-input {
+    text-align: center;
+}
+
 div.location-distance div.user-input div.input-wrap { margin-bottom: 25px; }
 div.location-distance div.user-input div.input-wrap label {
     display: block;
@@ -105,6 +94,7 @@ div.location-distance div.user-input div.input-wrap input {
     background-color: transparent;
     color: #fefefe;
     padding: 3px 8px;
+    text-transform: uppercase;
 }
 
 div.location-distance div.user-input div.input-wrap input:hover,
@@ -124,6 +114,19 @@ div.location-distance div.user-input div.submit-wrap button.btn:hover,
 div.location-distance div.user-input div.submit-wrap button.btn:focus {
     background-color: #fefefe;
     color: #00a8d5;
+}
+
+div.location-distance div.user-input div#result {
+    margin-top: 10px;
+    color: #fefefe;
+    font-size: 85%;
+}
+
+div.location-distance div.user-input div.form-message {
+    margin-top: 10px;
+    color: #fefefe;
+    text-align: center;
+    font-size: 85%;
 }
 
 /**

@@ -11,6 +11,8 @@ if ( ! function_exists( 'theme_setup' ) ):
 
     function theme_setup()
     {
+        // Adding User Location file
+        require_once 'inc/user-location.php';
 
         # Register our Navbar Menus
         register_nav_menus(
@@ -50,10 +52,11 @@ if ( ! function_exists( 'theme_resources' ) ):
         wp_enqueue_script( 'google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBvws2fKizxVlhPvpsYITqHr0TmQhwFsIw&&libraries=geometry', '', false, true );
 
         // Custom JavaScript (Custom Made)
+        wp_enqueue_script( 'gmaps-js', get_theme_file_uri( '/assets/js/gmaps.js' ), array( 'jquery' ), false, true );
         wp_enqueue_script( 'main-js', get_theme_file_uri( '/assets/js/main.js' ), array( 'jquery' ), false, true );
 
         // Admin Ajax Localize
-        wp_localize_script( 'form-js', 'formAjax',
+        wp_localize_script( 'main-js', 'locationAjax',
             array(
                 'ajaxurl'   => admin_url( 'admin-ajax.php' ),
             )
