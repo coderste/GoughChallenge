@@ -88,10 +88,7 @@ header#site-header h1::after {
 | =Location
 |---------------------
 */
-div.location-distance div.user-input div.input-wrap:first-of-type {
-    margin-bottom: 25px;
-}
-
+div.location-distance div.user-input div.input-wrap { margin-bottom: 25px; }
 div.location-distance div.user-input div.input-wrap label {
     display: block;
     color: #fefefe;
@@ -108,6 +105,19 @@ div.location-distance div.user-input div.input-wrap input:hover,
 div.location-distance div.user-input div.input-wrap input:focus {
     border: 1px solid #fefefe;
     outline: 0;
+}
+
+div.location-distance div.user-input div.submit-wrap button.btn {
+    border: 1px solid #fefefe;
+    background-color: transparent;
+    color: #fefefe;
+    transition: all .5s ease;
+}
+
+div.location-distance div.user-input div.submit-wrap button.btn:hover,
+div.location-distance div.user-input div.submit-wrap button.btn:focus {
+    background-color: #fefefe;
+    color: #00a8d5;
 }
 
 /**

@@ -19,6 +19,9 @@ get_header(); ?>
                 <label for="other_location">Other Location: </label>
                 <input type="text" name="other_location" />
             </div>
+            <div class="submit-wrap">
+                <button type="submit" class="btn btn-submit">Calculate Distance</button>
+            </div>
         </div>
     </div>
 
