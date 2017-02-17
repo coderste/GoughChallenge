@@ -1,4 +1,7 @@
 <?php
+/**
+ * Controls the fallback of all pages
+ */
 get_header(); ?>
 
 <?php

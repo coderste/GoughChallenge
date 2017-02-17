@@ -3,23 +3,37 @@
  * Theme URI: https://www.stephenhinett.co.uk
  * Author: Stephen Hinett
  * Author URI: https://www.stephenhinett.co.uk
- * Description: Custom WordPress Theme for the Gough Bailey Wright Challenge
- * Version: 1.0
- * License: GPL3
- * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * Description: WordPress Theme built for Gough Coding Challenge
+ * Version: 0.95
  */
 
 /* Import Fonts */
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900);
 
 /**
-|------------------------
-| =Global Style
-|------------------------
+|---------------------
+| =Animations
+|---------------------
 */
+@keyframes borderTransition {
+    from {
+        border: 1px dashed #fefefe;
+    }
+
+    to {
+        border: 1px solid #fefefe;
+    }
+}
+
+/**
+|---------------------
+| =Global Styles
+|---------------------
+*/
+
 body {
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    font-family: 'Roboto', sans-serif;
     background-color: #00a8d5;
 }
 
@@ -29,19 +43,103 @@ h3,
 h4,
 h5,
 h6 {
-    color: #fefefe;
     cursor: default;
+    color: #fefefe
+}
+
+p {
+    cursor: default;
+    color: #fefefe
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%
 }
 
 /**
-|------------------------
-| =Page Styles
-|------------------------
+|---------------------
+| =Header
+|---------------------
 */
 header#site-header {
     text-align: center;
 }
 
-header#site-header h1 {
-    text-transform: uppercase;
+header#site-header h1::after {
+    content: '';
+    display: block;
+    background-color: #fefefe;
+    height: 2px;
+    width: 65px;
+    margin: 0 auto;
+}
+
+/**
+|---------------------
+| =Location
+|---------------------
+*/
+div.location-distance div.user-input div.input-wrap:first-of-type {
+    margin-bottom: 25px;
+}
+
+div.location-distance div.user-input div.input-wrap label {
+    display: block;
+    color: #fefefe;
+}
+
+div.location-distance div.user-input div.input-wrap input {
+    border: 1px dashed #fefefe;
+    background-color: transparent;
+    color: #fefefe;
+    padding: 3px 8px;
+}
+
+div.location-distance div.user-input div.input-wrap input:hover,
+div.location-distance div.user-input div.input-wrap input:focus {
+    border: 1px solid #fefefe;
+    outline: 0;
+}
+
+/**
+|---------------------
+| =Footer
+|---------------------
+*/
+footer#main-footer {
+    border-top: 1px dashed #fefefe;
+    padding-top: 15px;
+    margin-top: 50px;
+}
+
+footer#main-footer div.site-info div.social-icons a.icons {
+    color: #fefefe;
+    font-size: 200%;
+    height: 42px;
+    width: 42px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 0 10px;
+    transition: all .5s ease;
+}
+
+footer#main-footer div.site-info div.social-icons a.icons:hover {
+    background-color: #fefefe;
+    color: #00a8d5;
+}
+
+footer#main-footer div.copyright p {
+    font-size: 90%;
+    margin: 13px 0 0;
+    text-align: right;
 }

@@ -1,41 +1,119 @@
 <?php
 /**
- * Sets up Theme defaults and registers support for various WordPress features.
+ * Functions file contains all the website functions including:
+ * - Navbar Functionality
+ * - Advanced Custom Fields ~ Global Options
  *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- *
- * @since Template Theme 1.0
+ * This file is pretty much the same for all our websites.
  */
 
-function theme_setup() {
-    // Register the Navbar for this Theme
-    register_nav_menus(
-        array(
-            'primary' => 'Primary Navbar',
-            'footer' => 'Footer Navbar',
-        )
-    );
+if ( ! function_exists( 'theme_setup' ) ):
 
-    // Add featured image support
-    add_theme_support('post-thumbnails');
-}
-add_action('after_setup_theme', 'theme_setup');
+    function theme_setup()
+    {
+
+        # Register our Navbar Menus
+        register_nav_menus(
+            [
+                'primary'   => 'Main Navbar',
+                'footer'    => 'Footer Navbar',
+            ]
+        );
+
+        // Theme Support
+        add_theme_support( 'post-thumbnails' );
+
+        // Add Title Support - helps with Yoast-SEO
+        add_theme_support( 'title-tag' );
+    }
+    add_action( 'after_setup_theme', 'theme_setup' );
+
+endif;
+
+if ( ! function_exists( 'theme_resources' ) ):
+
+    function theme_resources()
+    {
+        // Main Framework CSS
+        wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css' );
+
+        // Other CSS Files before Main Stylesheet
+        // wp_enqueue_style( 'css-file-name', get_theme_file_uri( '/assets/css' ) );
+
+        // Main Stylesheet
+        wp_enqueue_style( 'main-css', get_stylesheet_uri() );
+
+        // Main Framework JS
+        wp_enqueue_script( 'bootstrap-js', get_theme_file_uri( '/assets/js/bootstrap.js' ), array( 'jquery' ), false, true );
+
+        // Other JS Files (Mainly 3rd Party Sliders etc.)
+        // wp_enqueue_script( 'slider-js', get_theme_file_uri( '/assets/js/' ), array( '' ), false, true );
+
+        // Custom JavaScript (Custom Made)
+        wp_enqueue_script( 'form-js', get_theme_file_uri( '/assets/js/form.js' ), array( 'jquery' ), false, true );
+        wp_enqueue_script( 'main-js', get_theme_file_uri( '/assets/js/main.js' ), array( 'jquery' ), false, true );
+
+        // Admin Ajax Localize
+        wp_localize_script( 'form-js', 'formAjax',
+            array(
+                'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+            )
+        );
+    }
+    add_action( 'wp_enqueue_scripts', 'theme_resources' );
+
+endif;
 
 /**
- * Enqueues scripts and styles
+ * Functions below are there for security reasons
+ * [Do not remove!]
  */
-function theme_scripts() {
-    // Main Stylesheet
-    wp_enqueue_style( 'style', get_stylesheet_uri() );
 
-    // Register Custom JavaScripts
-    wp_register_script('app-js', get_theme_file_uri( '/assets/js/app.js' ), array( 'jquery' ), '', true);
+/**
+ * Remove ?ver from the end of enqueued files
+ * for security reasons
+ */
+if ( ! function_exists( 'remove_theme_ver' ) ):
 
-    // Enqueue Custom JavaScripts
-    wp_enqueue_script('app-js');
-}
-add_action('wp_enqueue_scripts', 'theme_scripts');
+    function remove_theme_ver( $url )
+    {
+        return remove_query_arg( 'ver', $url );
+    }
+    add_filter( 'style_loader_src', 'remove_theme_ver' );
+    add_filter( 'script_loader_src', 'remove_theme_ver' );
 
-?>
+endif;
+
+/**
+ * Remove the WordPress Generator meta tag
+ * from source code for security reasons
+ */
+remove_action( 'wp_head', 'wp_generator' );
+
+/**
+ * Remove WordPress Emoji's this then removes
+ * unnesscary JS files and speeds up the site
+ */
+if ( ! function_exists( 'disable_emojis' ) ):
+
+    function disable_emojis()
+    {
+        remove_action( 'admin_print_styles', 'print_emoji_styles' );
+        remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+        remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+        remove_action( 'wp_print_styles', 'print_emoji_styles' );
+        remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+        remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+        remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+    }
+    add_action( 'init', 'disable_emojis' );
+    add_filter( 'emoji_svg_url', '__return_false' );
+
+endif;
+
+/**
+ * Advanced Custom Fields
+ *
+ * Anything below here should be linked to Advanced Custom Fields
+ * only
+ */
