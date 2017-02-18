@@ -24,32 +24,13 @@
 	<!-- WordPress Footer -->
 	<?php wp_footer(); ?>
     <script type="text/javascript">
+    jQuery(document).ready( function($) {
+
         map = new GMaps({
             div: '#map',
             lat: 52.3353884,
             lng: -2.0625768
         });
-        GMaps.geolocate({
-            success: function( position )
-            {
-                map.setCenter( position.coords.latitude, position.coords.longitude );
-                map.addMarker( {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                } );
-            },
-            error: function( error )
-            {
-                alert( 'Gelocation Failed! ' + error.message );
-            },
-            not_supported: function()
-            {
-                alert( 'Your browser does not support geolocation' );
-            }
-        })
-    </script>
-    <script type="text/javascript">
-    jQuery(document).ready( function($) {
 
         $( function() {
             var locationForm = $( '#location_form' );
@@ -71,6 +52,8 @@
                 var user_loc = $( '#user_loc' ).val();
                 var other_loc = $( '#other_loc' ).val();
 
+                var bounds = new google.maps.LatLngBounds();
+
                 $.ajax({
                     type: 'POST',
                     url: locationAjax.ajaxurl,
@@ -81,6 +64,35 @@
                     },
                     success: function( data )
                     {
+                        GMaps.geocode({
+                            address: $('#user_loc').val(),
+                            callback: function( results, status ) {
+                                if ( status == 'OK' ) {
+                                    var latlng = results[0].geometry.location;
+                                    map.setCenter( latlng.lat(), latlng.lng() );
+                                    map.addMarker( {
+                                        lat: latlng.lat(),
+                                        lng: latlng.lng()
+                                    } )
+                                }
+                            }
+                        });
+
+                        GMaps.geocode({
+                            address: $('#other_loc').val(),
+                            callback: function( results, status ) {
+                                if ( status == 'OK' ) {
+                                    var latlng = results[0].geometry.location;
+                                    map.addMarker( {
+                                        lat: latlng.lat(),
+                                        lng: latlng.lng()
+                                    } )
+                                }
+                            }
+                        });
+
+                        console.log( map.markers )
+
                         $( formMessage ).remove();
                         $( results ).html( data );
 

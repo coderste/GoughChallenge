@@ -24,6 +24,7 @@ function locationForm()
             <input id="other_loc" type="text" name="other_location" class="required" />
         </div>
         <div class="submit-wrap">
+            <input type="hidden" name="action" value="location_submit">
             <button type="submit" class="btn btn-submit">Calculate Distance</button>
         </div>
         <div id="result"></div>
@@ -72,6 +73,7 @@ function location_data()
             echo "To: ". $data->destination_addresses[0];
             echo "<br/>";
             echo "</div>";
+            die;
         } else {
             die;
         }
