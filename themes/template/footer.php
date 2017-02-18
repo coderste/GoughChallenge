@@ -23,17 +23,33 @@
 
 	<!-- WordPress Footer -->
 	<?php wp_footer(); ?>
-    <script>
-    jQuery(document).ready( function($) {
+    <script type="text/javascript">
         map = new GMaps({
             div: '#map',
             lat: 52.3353884,
             lng: -2.0625768
         });
-        map.addMarker({
-            lat: 52.3353884,
-            lng: -2.0625768,
-        });
+        GMaps.geolocate({
+            success: function( position )
+            {
+                map.setCenter( position.coords.latitude, position.coords.longitude );
+                map.addMarker( {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                } );
+            },
+            error: function( error )
+            {
+                alert( 'Gelocation Failed! ' + error.message );
+            },
+            not_supported: function()
+            {
+                alert( 'Your browser does not support geolocation' );
+            }
+        })
+    </script>
+    <script type="text/javascript">
+    jQuery(document).ready( function($) {
 
         $( function() {
             var locationForm = $( '#location_form' );
