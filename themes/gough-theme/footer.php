@@ -89,6 +89,7 @@
                                                     strokeOpacity: 0.6,
                                                     strokeWeight: 6
                                                 });
+
                                                 // Store both locations in one an array
                                                 var latlngs = [
                                                     {
@@ -100,21 +101,24 @@
                                                         lng: latlng2.lng()
                                                     }
                                                 ];
+
                                                 // Bounds is an empty array
                                                 var bounds = [];
+
                                                 // For each location in the latlngs array
                                                 // add the markers and zoom the map out
                                                 // to fit the boundaries
                                                 for ( var i in latlngs ) {
                                                     var latlng = new google.maps.LatLng( latlngs[i].lat, latlngs[i].lng )
                                                     bounds.push( latlng );
+                                                    // Add the markers that are in the latlngs array
                                                     map.addMarker({
                                                         lat: latlngs[i].lat,
                                                         lng: latlngs[i].lng
                                                     })
                                                 }
                                                 // Fir the LatLngBounds
-                                                map.fitLatLngBounds(bounds);
+                                                map.fitLatLngBounds( bounds );
                                             }
                                         }
                                     });
