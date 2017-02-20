@@ -53,10 +53,10 @@ if ( ! function_exists( 'theme_resources' ) ):
 
         // Custom JavaScript (Custom Made)
         wp_enqueue_script( 'gmaps-js', get_theme_file_uri( '/assets/js/gmaps.js' ), array( 'jquery' ), false, true );
-        wp_enqueue_script( 'main-js', get_theme_file_uri( '/assets/js/main.js' ), array( 'jquery' ), false, true );
+        // wp_enqueue_script( 'main-js', get_theme_file_uri( '/assets/js/main.js' ), array( 'jquery' ), false, true );
 
         // Admin Ajax Localize
-        wp_localize_script( 'main-js', 'locationAjax',
+        wp_localize_script( 'gmaps-js', 'locationAjax',
             array(
                 'ajaxurl'   => admin_url( 'admin-ajax.php' ),
             )

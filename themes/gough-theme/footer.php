@@ -9,8 +9,9 @@
 			<!-- Info -->
 			<div class="site-info wrapper clearfix">
 				<div class="col-md-6 social-icons">
-					<a href="#" class="icons" target="_blank"><i class="fa fa-github"></i></a>
-					<a href="#" class="icons" target="_blank"><i class="fa fa-stack-exchange"></i></a>
+					<a href="https://github.com/coderste/GoughChallenge" class="icons" target="_blank"><i class="fa fa-github"></i></a>
+					<a href="https://wordpress.stackexchange.com/users/85776/coderste?tab=profile" class="icons" target="_blank"><i class="fa fa-stack-exchange"></i></a>
+                    <a href="https://www.stephenhinett.co.uk" class="icons" target="_blank"><i class="fa fa-globe"></i></a>
 				</div>
 				<div class="col-md-6 copyright">
 					<p>Copyright &copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>. All Rights Reserved.</p>
@@ -89,9 +90,9 @@
                                                     origin: [latlng1.lat(), latlng1.lng()],
                                                     destination: [latlng2.lat(), latlng2.lng()],
                                                     travelMode: 'driving',
-                                                    strokeColor: '#131540',
-                                                    strokeOpacity: 0.6,
-                                                    strokeWeight: 6
+                                                    strokeColor: '#00a8d5',
+                                                    strokeOpacity: 1,
+                                                    strokeWeight: 4
                                                 });
 
                                                 // Store both locations in one an array

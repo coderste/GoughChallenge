@@ -66,7 +66,7 @@ function location_data()
         if ( $distance != 0 )
         {
             echo "<div id='result-generated'>";
-            echo "Distance: " . $distance . " km(s)";
+            echo "Distance: " . $distance . " km";
             echo "<br/>";
             echo "From: " . $data->origin_addresses[0];
             echo "<br/>";

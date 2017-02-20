@@ -90,7 +90,7 @@ div.location-distance div.user-input div.input-wrap label {
 }
 
 div.location-distance div.user-input div.input-wrap input {
-    border: 1px dashed #fefefe;
+    border: 1px solid #fefefe;
     background-color: transparent;
     color: #fefefe;
     padding: 3px 8px;
@@ -99,7 +99,6 @@ div.location-distance div.user-input div.input-wrap input {
 
 div.location-distance div.user-input div.input-wrap input:hover,
 div.location-distance div.user-input div.input-wrap input:focus {
-    border: 1px solid #fefefe;
     outline: 0;
 }
 
