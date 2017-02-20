@@ -45,14 +45,18 @@
                 eve.preventDefault();
                 eve.stopPropagation();
 
+                // Clear all Markers and start map from fresh
+                map.removeMarkers();
+
+                // Remove the route
+                map.cleanRoute();
+
                 // Disable button
                 submitButton.attr( 'disabled', 'disabled' );
                 submitButton.addClass( 'disabled' );
 
                 var user_loc = $( '#user_loc' ).val();
                 var other_loc = $( '#other_loc' ).val();
-
-                var bounds = new google.maps.LatLngBounds();
 
                 $.ajax({
                     type: 'POST',
