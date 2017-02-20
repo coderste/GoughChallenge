@@ -5,6 +5,8 @@ This repository contains a Basic WordPress theme that adds a shortcode to the we
 
 This WordPress Theme uses [GMaps](https://hpneo.github.io/gmaps/) to make for easier use of Google Maps API.
 
+Use the Shortcode [LocationForm] to call the User input fields
+
 Feautres:
 ---
 * Allows users to enter just there post code to find out the distance between two locations
